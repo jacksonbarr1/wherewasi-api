@@ -151,7 +151,6 @@
 				<version>3.3.1</version>
 				<configuration>
 					<includes>
-						<include>**/*Tests.java</include>
 						<include>**/*Test.java</include>
 					</includes>
 					<excludes>
