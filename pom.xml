@@ -156,7 +156,6 @@
 					</includes>
 					<excludes>
 						<exclude>**/*IT.java</exclude>
-						<exclude>**/WherewasiApiApplicationTests.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -167,7 +166,6 @@
 				<configuration>
 					<includes>
 						<include>**/*IT.java</include>
-						<include>**/WherewasiApiApplicationTests.java</include>
 					</includes>
 					<systemPropertyVariables>
 						<spring.profiles.active>test</spring.profiles.active>

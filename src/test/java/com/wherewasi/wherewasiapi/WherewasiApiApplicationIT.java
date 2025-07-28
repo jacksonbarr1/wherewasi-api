@@ -6,7 +6,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class WherewasiApiApplicationTests extends AbstractIT {
+class WherewasiApiApplicationIT extends AbstractIT {
 
 	@Test
 	void contextLoads() {
