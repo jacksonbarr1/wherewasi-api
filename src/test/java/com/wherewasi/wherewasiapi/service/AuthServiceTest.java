@@ -24,8 +24,7 @@ public class AuthServiceTest {
     @Test
     void whenUserExists_thenThrowEmailTakenException() {
 
-        when(userRepository.existsByEmail(anyString()))
-                .thenThrow(EmailTakenException.class);
+        when(userRepository.existsByEmail(anyString())).thenReturn(true);
 
         assertThrows(EmailTakenException.class, () -> authService.register(RegisterRequest.builder()
                 .name("John")
