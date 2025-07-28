@@ -1,14 +1,13 @@
 package com.wherewasi.wherewasiapi.service;
 
-import com.wherewasi.wherewasiapi.enumeration.UserRole;
-import com.wherewasi.wherewasiapi.exception.AuthenticationFailedException;
-import com.wherewasi.wherewasiapi.exception.EmailTakenException;
-import com.wherewasi.wherewasiapi.exception.WeakPasswordException;
-import com.wherewasi.wherewasiapi.model.User;
-import com.wherewasi.wherewasiapi.repository.UserRepository;
 import com.wherewasi.wherewasiapi.dto.request.AuthenticationRequest;
 import com.wherewasi.wherewasiapi.dto.request.RegisterRequest;
 import com.wherewasi.wherewasiapi.dto.response.AuthenticationResponse;
+import com.wherewasi.wherewasiapi.enumeration.UserRole;
+import com.wherewasi.wherewasiapi.exception.AuthenticationFailedException;
+import com.wherewasi.wherewasiapi.exception.EmailTakenException;
+import com.wherewasi.wherewasiapi.model.User;
+import com.wherewasi.wherewasiapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -7,7 +7,6 @@ import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.Iterator;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;

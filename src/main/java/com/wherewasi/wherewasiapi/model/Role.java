@@ -15,7 +15,8 @@ public class Role {
     private ObjectId id;
     private UserRole name;
 
-    public Role() {}
+    public Role() {
+    }
 
     public Role(UserRole name) {
         this.name = name;
