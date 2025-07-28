@@ -18,7 +18,7 @@ public class UserRepositoryIT extends AbstractIT {
     @Test
     void shouldSaveAndFindUserByEmail() {
         User user = User.builder()
-                .name("John")
+                .firstName("John")
                 .lastName("Doe")
                 .email("john.doe@example.com")
                 .password("password")
@@ -35,7 +35,7 @@ public class UserRepositoryIT extends AbstractIT {
         assertThat(foundUserOptional).isPresent();
         User foundUser = foundUserOptional.get();
         assertThat(foundUser.getId()).isEqualTo(savedUser.getId());
-        assertThat(foundUser.getName()).isEqualTo("John");
+        assertThat(foundUser.getFirstName()).isEqualTo("John");
         assertThat(foundUser.getLastName()).isEqualTo("Doe");
         assertThat(foundUser.getEmail()).isEqualTo("john.doe@example.com");
         assertThat(foundUser.getRole()).isEqualTo(UserRole.ROLE_USER);

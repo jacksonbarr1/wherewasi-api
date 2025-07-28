@@ -19,7 +19,7 @@ import java.util.List;
 @Document(collection = "users")
 public class User implements UserDetails {
     private String id;
-    private String name;
+    private String firstName;
     private String lastName;
     private String email;
     private String password;
