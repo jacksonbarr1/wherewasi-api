@@ -1,7 +1,7 @@
 package com.wherewasi.wherewasiapi.controller;
 
-import com.wherewasi.wherewasiapi.request.auth.AuthenticationRequest;
-import com.wherewasi.wherewasiapi.request.auth.RegisterRequest;
+import com.wherewasi.wherewasiapi.dto.request.AuthenticationRequest;
+import com.wherewasi.wherewasiapi.dto.request.RegisterRequest;
 import com.wherewasi.wherewasiapi.response.AuthenticationResponse;
 import com.wherewasi.wherewasiapi.service.AuthService;
 import lombok.RequiredArgsConstructor;
