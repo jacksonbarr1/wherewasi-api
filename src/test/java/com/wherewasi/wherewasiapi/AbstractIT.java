@@ -24,7 +24,6 @@ public abstract class AbstractIT {
 
     @DynamicPropertySource
     static void setDatasourceProperties(DynamicPropertyRegistry registry) {
-        mongoDbContainer.start();
         registry.add("spring.data.mongodb.host", mongoDbContainer::getHost);
         registry.add("spring.data.mongodb.port", () -> mongoDbContainer.getFirstMappedPort());
         registry.add("spring.data.redis.host", redisContainer::getHost);
