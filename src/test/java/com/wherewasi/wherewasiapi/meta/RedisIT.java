@@ -1,9 +1,8 @@
 package com.wherewasi.wherewasiapi.meta;
 
 import com.wherewasi.wherewasiapi.AbstractIT;
-import com.wherewasi.wherewasiapi.dto.response.ShowMetadataDTO;
+import com.wherewasi.wherewasiapi.dto.ShowMetadataDTO;
 import com.wherewasi.wherewasiapi.model.Show;
-import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,7 +21,6 @@ public class RedisIT extends AbstractIT {
         ShowMetadataDTO dto = ShowMetadataDTO.builder()
                 .id(1)
                 .name("Test Show")
-                .overview("Overview")
                 .genres(
                         List.of(
                                 Show.Genre.builder()
@@ -41,8 +39,6 @@ public class RedisIT extends AbstractIT {
                 .voteCount(100)
                 .popularity(10.1f)
                 .posterPath("/path/to/poster.jpg")
-                .originCountry(List.of("US"))
-                .originLanguage("en")
                 .build();
 
         String cacheKey = "show_metadata:" + dto.getId();
@@ -54,7 +50,6 @@ public class RedisIT extends AbstractIT {
         assertThat(cachedDto).isNotNull();
         assertThat(cachedDto.getId()).isEqualTo(dto.getId());
         assertThat(cachedDto.getName()).isEqualTo(dto.getName());
-        assertThat(cachedDto.getOverview()).isEqualTo(dto.getOverview());
         assertThat(cachedDto.getGenres().size()).isEqualTo(2);
         assertThat(cachedDto.getGenres().get(0).getName()).isEqualTo("Comedy");
         assertThat(cachedDto.getGenres().get(1).getName()).isEqualTo("Drama");
@@ -63,8 +58,5 @@ public class RedisIT extends AbstractIT {
         assertThat(cachedDto.getVoteCount()).isEqualTo(dto.getVoteCount());
         assertThat(cachedDto.getPopularity()).isEqualTo(dto.getPopularity());
         assertThat(cachedDto.getPosterPath()).isEqualTo(dto.getPosterPath());
-        assertThat(cachedDto.getOriginCountry().size()).isEqualTo(1);
-        assertThat(cachedDto.getOriginCountry().getFirst()).isEqualTo("US");
-        assertThat(cachedDto.getOriginLanguage()).isEqualTo(dto.getOriginLanguage());
     }
 }

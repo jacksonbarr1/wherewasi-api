@@ -1,4 +1,4 @@
-package com.wherewasi.wherewasiapi.dto.response;
+package com.wherewasi.wherewasiapi.dto;
 
 import com.wherewasi.wherewasiapi.model.Show;
 import lombok.AllArgsConstructor;
@@ -15,13 +15,10 @@ import java.util.List;
 public class ShowMetadataDTO {
     private Integer id;
     private String name;
-    private String overview;
     private List<Show.Genre> genres;
     private String firstAirDate;
     private Float voteAverage;
     private Integer voteCount;
     private Float popularity;
     private String posterPath;
-    private List<String> originCountry;
-    private String originLanguage;
 }
