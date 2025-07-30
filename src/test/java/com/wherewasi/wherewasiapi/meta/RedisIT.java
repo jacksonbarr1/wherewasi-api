@@ -1,7 +1,7 @@
 package com.wherewasi.wherewasiapi.meta;
 
 import com.wherewasi.wherewasiapi.AbstractIT;
-import com.wherewasi.wherewasiapi.dto.ShowMetadataDTO;
+import com.wherewasi.wherewasiapi.dto.response.ShowMetadataDTO;
 import com.wherewasi.wherewasiapi.model.Show;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.wherewasi.wherewasiapi.controller;
 
-import com.wherewasi.wherewasiapi.dto.ShowMetadataDTO;
+import com.wherewasi.wherewasiapi.dto.response.ShowMetadataDTO;
 import com.wherewasi.wherewasiapi.service.ShowService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

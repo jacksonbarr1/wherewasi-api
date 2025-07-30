@@ -1,4 +1,4 @@
-package com.wherewasi.wherewasiapi.dto;
+package com.wherewasi.wherewasiapi.dto.response;
 
 import com.wherewasi.wherewasiapi.model.Show;
 import lombok.AllArgsConstructor;
@@ -7,6 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
+/**
+ * DTO for representing previews of shows on the homepage and in search results.
+ */
 
 @Builder
 @Data

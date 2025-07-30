@@ -2,7 +2,7 @@ package com.wherewasi.wherewasiapi.service;
 
 import com.wherewasi.wherewasiapi.client.TmdbApiClient;
 import com.wherewasi.wherewasiapi.client.dto.TmdbSearchResult;
-import com.wherewasi.wherewasiapi.dto.ShowMetadataDTO;
+import com.wherewasi.wherewasiapi.dto.response.ShowMetadataDTO;
 import com.wherewasi.wherewasiapi.client.dto.TmdbSearchResponse;
 import com.wherewasi.wherewasiapi.model.Show;
 import lombok.AllArgsConstructor;
@@ -50,6 +50,7 @@ public class TmdbServiceImpl implements TmdbService {
             currentPage++;
         }
 
+        // TODO: Sort by popularity
         return rawResults.stream()
                 .filter(this::isEnglishLanguage)
                 .map(this::mapToShowMetadataDTO)

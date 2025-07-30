@@ -1,6 +1,6 @@
 package com.wherewasi.wherewasiapi.service;
 
-import com.wherewasi.wherewasiapi.dto.ShowMetadataDTO;
+import com.wherewasi.wherewasiapi.dto.response.ShowMetadataDTO;
 import com.wherewasi.wherewasiapi.model.Show;
 import com.wherewasi.wherewasiapi.repository.ShowRepository;
 import lombok.AllArgsConstructor;
