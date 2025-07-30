@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.wherewasi.wherewasiapi.util.QueryNormalizer.normalizeQuery;
 
@@ -57,7 +58,7 @@ public class TmdbServiceImpl implements TmdbService {
                 .filter(this::isEnglishLanguage)
                 .map(this::mapToShowMetadataDTO)
                 .limit(DESIRED_SEARCH_SUGGESTIONS_COUNT)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private boolean isEnglishLanguage(TmdbSearchResult dto) {
