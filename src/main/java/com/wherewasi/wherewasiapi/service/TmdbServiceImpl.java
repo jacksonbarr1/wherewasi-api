@@ -22,8 +22,6 @@ public class TmdbServiceImpl implements TmdbService {
     private final TmdbApiClient tmdbApiClient;
     private final GenreService genreService;
 
-    private static final Logger logger = LoggerFactory.getLogger(TmdbServiceImpl.class);
-
     private static final int DESIRED_SEARCH_SUGGESTIONS_COUNT = 5;
     private static final int MAX_SEARCH_PAGES_TO_FETCH = 3;
 
@@ -67,9 +65,6 @@ public class TmdbServiceImpl implements TmdbService {
     }
 
     private ShowMetadataDTO mapToShowMetadataDTO(TmdbSearchResult tmdbResult) {
-        logger.info("Mapping TMDB Search Result (ID: {}, name: \"{}\") to ShowMetadataDTO (Genre IDs: {})",
-                tmdbResult.getId(), tmdbResult.getName(), tmdbResult.getGenreIds());
-        // TMDB's `/search` response includes genre IDs but not genre names.
         List<Show.Genre> mappedGenres = new ArrayList<>();
         if (tmdbResult.getGenreIds() != null) {
             tmdbResult.getGenreIds().forEach(genreId -> {
@@ -79,10 +74,6 @@ public class TmdbServiceImpl implements TmdbService {
                 }
             });
         }
-
-        logger.info("Retrieved {} genres for TMDB result ID: {}", mappedGenres.size(), tmdbResult.getId());
-
-        // TODO: Figure out why MetadataDTO objects have empty genre arrays
 
         return ShowMetadataDTO.builder()
                 .id(tmdbResult.getId())
