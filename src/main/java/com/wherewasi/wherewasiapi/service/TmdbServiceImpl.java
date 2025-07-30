@@ -1,13 +1,11 @@
 package com.wherewasi.wherewasiapi.service;
 
 import com.wherewasi.wherewasiapi.client.TmdbApiClient;
+import com.wherewasi.wherewasiapi.client.dto.TmdbSearchResponse;
 import com.wherewasi.wherewasiapi.client.dto.TmdbSearchResult;
 import com.wherewasi.wherewasiapi.dto.response.ShowMetadataDTO;
-import com.wherewasi.wherewasiapi.client.dto.TmdbSearchResponse;
 import com.wherewasi.wherewasiapi.model.Show;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,12 +18,10 @@ import static com.wherewasi.wherewasiapi.util.QueryNormalizer.normalizeQuery;
 @Service
 @AllArgsConstructor
 public class TmdbServiceImpl implements TmdbService {
-    private final TmdbApiClient tmdbApiClient;
-    private final GenreService genreService;
-
     private static final int DESIRED_SEARCH_SUGGESTIONS_COUNT = 5;
     private static final int MAX_SEARCH_PAGES_TO_FETCH = 3;
-
+    private final TmdbApiClient tmdbApiClient;
+    private final GenreService genreService;
 
     public List<ShowMetadataDTO> searchTvShows(String query) {
         String normalizedQuery = normalizeQuery(query);
@@ -36,8 +32,8 @@ public class TmdbServiceImpl implements TmdbService {
         int totalPagesAvailable = 1;
 
         while (rawResults.stream().filter(this::isEnglishLanguage).count() < DESIRED_SEARCH_SUGGESTIONS_COUNT &&
-            currentPage <= MAX_SEARCH_PAGES_TO_FETCH &&
-            currentPage <= totalPagesAvailable) {
+                currentPage <= MAX_SEARCH_PAGES_TO_FETCH &&
+                currentPage <= totalPagesAvailable) {
             Optional<TmdbSearchResponse> searchResponseOptional = tmdbApiClient.searchTvShows(normalizedQuery, currentPage);
 
             if (searchResponseOptional.isEmpty() || searchResponseOptional.get().getResults() == null

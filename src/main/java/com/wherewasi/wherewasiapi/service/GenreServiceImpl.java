@@ -21,10 +21,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class GenreServiceImpl implements GenreService {
 
+    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(GenreServiceImpl.class);
     private final TmdbApiClient tmdbApiClient;
     private ApplicationContext applicationContext;
-
-    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(GenreServiceImpl.class);
 
     public Show.Genre getGenreById(Integer id) {
         return applicationContext.getBean(GenreServiceImpl.class).getAndCacheAllGenres().get(String.valueOf(id));

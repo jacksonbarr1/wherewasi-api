@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ShowService {
     Show getShowById(Integer id);
+
     List<ShowMetadataDTO> searchShows(String query);
+
     List<ShowMetadataDTO> getPopularShows();
 }

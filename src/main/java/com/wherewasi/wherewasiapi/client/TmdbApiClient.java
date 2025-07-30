@@ -21,11 +21,8 @@ import java.util.Optional;
 public class TmdbApiClient {
 
     private static final Logger logger = LoggerFactory.getLogger(TmdbApiClient.class);
-
-    private final RestClient restClient;
-
     private static final String TMDB_API_BASE_URL = "https://api.themoviedb.org/3";
-
+    private final RestClient restClient;
     private final Bucket apiRequestBucket;
 
     public TmdbApiClient(RestClient tmdbRestClient) {
@@ -53,7 +50,7 @@ public class TmdbApiClient {
             apiRequestBucket.asBlocking().consume(1);
 
             logger.info("Making API call to {} for {} with identifiers: {}",
-                        uri, description, identifiers);
+                    uri, description, identifiers);
 
             T responseBody = restClient.get()
                     .uri(uri)
