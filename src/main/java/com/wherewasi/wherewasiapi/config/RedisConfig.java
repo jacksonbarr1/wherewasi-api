@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
 import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.wherewasi.wherewasiapi.util.CacheConstants;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,17 +38,17 @@ public class RedisConfig {
 
         // Short TTL
         // Users are very unlikely to repeat searches within a short time frame
-        cacheConfigurations.put("showSearch", defaultConfig.entryTtl(Duration.ofMinutes(10)));
+        cacheConfigurations.put(CacheConstants.CACHE_NAME_SHOW_SEARCH, defaultConfig.entryTtl(Duration.ofMinutes(10)));
 
         // Medium TTL
         // Users are likely to revisit shows within a few hours, and show details don't change often
-        cacheConfigurations.put("showDetails", defaultConfig.entryTtl(Duration.ofHours(12)));
+        cacheConfigurations.put(CacheConstants.CACHE_NAME_SHOW_DETAILS, defaultConfig.entryTtl(Duration.ofHours(12)));
 
-        cacheConfigurations.put("seasonDetails", defaultConfig.entryTtl(Duration.ofHours(12)));
+        cacheConfigurations.put(CacheConstants.CACHE_NAME_SEASON_DETAILS, defaultConfig.entryTtl(Duration.ofHours(12)));
 
         // Long TTL
         // Genre details are basically static
-        cacheConfigurations.put("genreDetails", defaultConfig.entryTtl(Duration.ofDays(7)));
+        cacheConfigurations.put(CacheConstants.CACHE_NAME_GENRES, defaultConfig.entryTtl(Duration.ofDays(7)));
 
         return RedisCacheManager.builder(redisConnectionFactory)
                 .cacheDefaults(defaultConfig)

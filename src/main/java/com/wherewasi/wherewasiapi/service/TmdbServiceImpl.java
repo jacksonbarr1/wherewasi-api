@@ -6,6 +6,8 @@ import com.wherewasi.wherewasiapi.dto.response.ShowMetadataDTO;
 import com.wherewasi.wherewasiapi.client.dto.TmdbSearchResponse;
 import com.wherewasi.wherewasiapi.model.Show;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ import static com.wherewasi.wherewasiapi.util.QueryNormalizer.normalizeQuery;
 public class TmdbServiceImpl implements TmdbService {
     private final TmdbApiClient tmdbApiClient;
     private final GenreService genreService;
+
+    private static final Logger logger = LoggerFactory.getLogger(TmdbServiceImpl.class);
 
     private static final int DESIRED_SEARCH_SUGGESTIONS_COUNT = 5;
     private static final int MAX_SEARCH_PAGES_TO_FETCH = 3;
@@ -63,6 +67,8 @@ public class TmdbServiceImpl implements TmdbService {
     }
 
     private ShowMetadataDTO mapToShowMetadataDTO(TmdbSearchResult tmdbResult) {
+        logger.info("Mapping TMDB Search Result (ID: {}, name: \"{}\") to ShowMetadataDTO (Genre IDs: {})",
+                tmdbResult.getId(), tmdbResult.getName(), tmdbResult.getGenreIds());
         // TMDB's `/search` response includes genre IDs but not genre names.
         List<Show.Genre> mappedGenres = new ArrayList<>();
         if (tmdbResult.getGenreIds() != null) {
@@ -73,6 +79,8 @@ public class TmdbServiceImpl implements TmdbService {
                 }
             });
         }
+
+        logger.info("Retrieved {} genres for TMDB result ID: {}", mappedGenres.size(), tmdbResult.getId());
 
         // TODO: Figure out why MetadataDTO objects have empty genre arrays
 
