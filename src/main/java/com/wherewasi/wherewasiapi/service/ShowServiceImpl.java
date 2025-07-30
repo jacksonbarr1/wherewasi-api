@@ -3,9 +3,11 @@ package com.wherewasi.wherewasiapi.service;
 import com.wherewasi.wherewasiapi.dto.response.ShowMetadataDTO;
 import com.wherewasi.wherewasiapi.model.Show;
 import com.wherewasi.wherewasiapi.repository.ShowRepository;
+import com.wherewasi.wherewasiapi.util.CacheConstants;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -33,27 +35,9 @@ public class ShowServiceImpl implements ShowService {
     }
 
     @Override
+    @Cacheable(value = CacheConstants.CACHE_NAME_SHOW_SEARCH, key = "#query")
     public List<ShowMetadataDTO> searchShows(String query) {
-        String cacheKey = getTvShowSearchKey(query);
-
-        // Check Redis for cached query
-        List<ShowMetadataDTO> cachedResults = (List<ShowMetadataDTO>) redisTemplate.opsForValue().get(cacheKey);
-        if (cachedResults != null) {
-            logger.info("Cache hit for search query: {}", query);
-            return cachedResults;
-        }
-
-        logger.info("Cache miss for search query: {}", query);
-
-        // Retrieve search results from TMDB API
-        List<ShowMetadataDTO> results = tmdbService.searchTvShows(query);
-
-        // Cache results
-        if (results != null && !results.isEmpty()) {
-            redisTemplate.opsForValue().set(cacheKey, results, SEARCH_RESULTS_CACHE_TTL_MINUTES, TimeUnit.MINUTES);
-        }
-
-        return results;
+        return tmdbService.searchTvShows(query);
     }
 
     @Override
