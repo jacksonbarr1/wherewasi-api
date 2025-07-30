@@ -1,9 +1,10 @@
 package com.wherewasi.wherewasiapi.controller;
 
-import com.wherewasi.wherewasiapi.request.auth.AuthenticationRequest;
-import com.wherewasi.wherewasiapi.request.auth.RegisterRequest;
-import com.wherewasi.wherewasiapi.response.AuthenticationResponse;
+import com.wherewasi.wherewasiapi.dto.request.AuthenticationRequest;
+import com.wherewasi.wherewasiapi.dto.request.RegisterRequest;
+import com.wherewasi.wherewasiapi.dto.response.AuthenticationResponse;
 import com.wherewasi.wherewasiapi.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class AuthController {
     // and handled by global exception handler. `ResponseEntity.ok` is only ever returned to user on success.
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest request) {
         AuthenticationResponse response = authService.register(request);
         return ResponseEntity.ok(response);
     }

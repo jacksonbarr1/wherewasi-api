@@ -1,4 +1,4 @@
-package com.wherewasi.wherewasiapi.response;
+package com.wherewasi.wherewasiapi.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

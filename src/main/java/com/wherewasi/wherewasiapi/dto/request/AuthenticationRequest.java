@@ -1,4 +1,4 @@
-package com.wherewasi.wherewasiapi.request.auth;
+package com.wherewasi.wherewasiapi.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class RegisterRequest {
-    private String name;
-    private String lastName;
+@NoArgsConstructor
+public class AuthenticationRequest {
     private String email;
     private String password;
 }

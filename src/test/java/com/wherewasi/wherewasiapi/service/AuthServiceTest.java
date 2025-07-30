@@ -1,8 +1,8 @@
 package com.wherewasi.wherewasiapi.service;
 
+import com.wherewasi.wherewasiapi.dto.request.RegisterRequest;
 import com.wherewasi.wherewasiapi.exception.EmailTakenException;
 import com.wherewasi.wherewasiapi.repository.UserRepository;
-import com.wherewasi.wherewasiapi.request.auth.RegisterRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,7 +27,7 @@ public class AuthServiceTest {
         when(userRepository.existsByEmail(anyString())).thenReturn(true);
 
         assertThrows(EmailTakenException.class, () -> authService.register(RegisterRequest.builder()
-                .name("John")
+                .firstName("John")
                 .lastName("Doe")
                 .email("john.doe@example.com")
                 .password("password")

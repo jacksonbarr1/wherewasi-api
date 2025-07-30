@@ -6,7 +6,6 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.MongoDBContainer;
-import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -14,13 +13,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 public abstract class AbstractIT {
 
-    @Container
-    static MongoDBContainer mongoDbContainer = new MongoDBContainer("mongo:latest")
-            .withExposedPorts(27017);
-
-    @Container
-    static GenericContainer<?> redisContainer = new GenericContainer<>("redis:latest")
-            .withExposedPorts(6379);
+    protected static final MongoDBContainer mongoDbContainer = SharedTestContainers.INSTANCE_MONGO;
+    protected static final GenericContainer<?> redisContainer = SharedTestContainers.INSTANCE_REDIS;
 
     @DynamicPropertySource
     static void setDatasourceProperties(DynamicPropertyRegistry registry) {
