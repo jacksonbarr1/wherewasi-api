@@ -7,8 +7,10 @@ import com.wherewasi.wherewasiapi.model.Show;
 import com.wherewasi.wherewasiapi.util.CacheConstants;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -18,15 +20,21 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
 public class GenreServiceImpl implements GenreService {
 
     private static final Logger logger = org.slf4j.LoggerFactory.getLogger(GenreServiceImpl.class);
     private final TmdbApiClient tmdbApiClient;
-    private ApplicationContext applicationContext;
+
+    @Autowired
+    @Lazy
+    private GenreServiceImpl self;
+
+    public GenreServiceImpl(TmdbApiClient tmdbApiClient) {
+        this.tmdbApiClient = tmdbApiClient;
+    }
 
     public Show.Genre getGenreById(Integer id) {
-        return applicationContext.getBean(GenreServiceImpl.class).getAndCacheAllGenres().get(String.valueOf(id));
+        return self.getAndCacheAllGenres().get(String.valueOf(id));
     }
 
     @Cacheable(value = CacheConstants.CACHE_NAME_GENRES, key = "'allGenres'")
