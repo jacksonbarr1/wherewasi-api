@@ -21,13 +21,6 @@ import static com.wherewasi.wherewasiapi.util.RedisKeyGenerator.getTvShowSearchK
 @AllArgsConstructor
 public class ShowServiceImpl implements ShowService {
     private final TmdbService tmdbService;
-    private final ShowRepository showRepository;
-    private final RedisTemplate<String, Object> redisTemplate;
-
-    private static final Logger logger = LoggerFactory.getLogger(ShowServiceImpl.class);
-
-    private static final long SEARCH_RESULTS_CACHE_TTL_MINUTES = 60;
-
 
     @Override
     public Show getShowById(Integer id) {
