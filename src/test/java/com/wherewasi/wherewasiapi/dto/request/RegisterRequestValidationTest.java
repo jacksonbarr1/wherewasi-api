@@ -70,7 +70,7 @@ public class RegisterRequestValidationTest {
     }
 
     @Test
-    void shoudlFailValidationWhenEmailisInvalid() {
+    void shouldFailValidationWhenEmailIsInvalid() {
         RegisterRequest request = RegisterRequest.builder()
                 .firstName("John")
                 .lastName("Doe")
@@ -87,7 +87,7 @@ public class RegisterRequestValidationTest {
     }
 
     @Test
-    void shouldFailValidatoinWhenPasswordIsBlank() {
+    void shouldFailValidationWhenPasswordIsBlank() {
         RegisterRequest request = RegisterRequest.builder()
                 .firstName("John")
                 .lastName("Doe")
