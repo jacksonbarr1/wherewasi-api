@@ -1,9 +1,12 @@
 package com.wherewasi.wherewasiapi.aop;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
@@ -28,6 +31,9 @@ public class LoggingAspect {
     public void applicationPackagePointcut() {
     }
 
+    @Pointcut("execution(* com.wherewasi.wherewasiapi..*.*(..)) && @annotation(org.springframework.cache.annotation.Cacheable)")
+    public void cacheableMethodPointcut() {}
+
     @Around("springBeanPointcut() && applicationPackagePointcut()")
     public Object applicationLogger(ProceedingJoinPoint joinPoint) throws Throwable {
         String className = joinPoint.getTarget().getClass().getSimpleName();
@@ -43,6 +49,16 @@ public class LoggingAspect {
                 object != null ? object.toString() : "void");
 
         return object;
+    }
 
+    @Before("cacheableMethodPointcut()")
+    public void cacheMissLogger(JoinPoint joinPoint) {
+        String className = joinPoint.getTarget().getClass().getSimpleName();
+        String methodName = joinPoint.getSignature().getName();
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        String cacheName = signature.getMethod()
+                .getAnnotation(org.springframework.cache.annotation.Cacheable.class).value()[0];
+
+        logger.info("Cache miss - Fetching data for method: {}.{}() for cache: {}", className, methodName, cacheName);
     }
 }
