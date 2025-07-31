@@ -16,8 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 public class ShowServiceImpl implements ShowService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ShowServiceImpl.class);
-
     private final TmdbService tmdbService;
 
     @Override
