@@ -39,7 +39,6 @@ public class GenreServiceImpl implements GenreService {
 
     @Cacheable(value = CacheConstants.CACHE_NAME_GENRES, key = "'allGenres'")
     public Map<String, Show.Genre> getAndCacheAllGenres() {
-        logger.info("Fetching and caching all TMDB TV genres from TMDB API.");
         Optional<TmdbGenreListResponse> responseOptional = tmdbApiClient.getTvGenreList();
 
         if (responseOptional.isPresent() && responseOptional.get().getGenres() != null) {
