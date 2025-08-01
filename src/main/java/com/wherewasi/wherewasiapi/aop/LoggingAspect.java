@@ -45,8 +45,13 @@ public class LoggingAspect {
 
         Object object = joinPoint.proceed();
 
-        logger.info("Exiting method: {}.{}() with result: {}", className, methodName,
-                object != null ? object.toString() : "void");
+        final int maxLength = 100;
+        String resultString = object != null ? object.toString() : "void";
+        if (resultString.length() > maxLength) {
+            resultString = resultString.substring(0, maxLength) + "... (truncated)";
+        }
+
+        logger.info("Exiting method: {}.{}() with result: {}", className, methodName, resultString);
 
         return object;
     }
