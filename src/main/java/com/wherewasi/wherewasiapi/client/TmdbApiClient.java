@@ -59,7 +59,7 @@ public class TmdbApiClient {
         return Optional.empty();
     }
 
-    public Optional<TmdbChangesResponse> getChangesById(Integer id) {
+    public Optional<TmdbChangesResponse> getChangesById(String id) {
         URI uri = URI.create(String.format("%s/tv/%d/changes", TMDB_API_BASE_URL, id));
         Optional<TmdbChangesResponse> responseOptional = executeApiCall(uri, TmdbChangesResponse.class,
                 "TV Show Changes", id);
