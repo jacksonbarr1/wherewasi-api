@@ -5,7 +5,9 @@ import com.wherewasi.wherewasiapi.client.dto.TmdbSearchResponse;
 import com.wherewasi.wherewasiapi.client.dto.TmdbSearchResult;
 import com.wherewasi.wherewasiapi.dto.response.ShowMetadataDTO;
 import com.wherewasi.wherewasiapi.model.Show;
+import com.wherewasi.wherewasiapi.util.CacheConstants;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -57,6 +59,7 @@ public class TmdbServiceImpl implements TmdbService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(value = CacheConstants.CACHE_NAME_SHOW, key = "#id")
     public Show getShowById(String id) {
         return tmdbApiClient.getShowById(id).orElse(null);
     }
