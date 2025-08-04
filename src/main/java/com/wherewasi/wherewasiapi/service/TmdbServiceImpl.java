@@ -64,8 +64,8 @@ public class TmdbServiceImpl implements TmdbService {
     }
 
     @Cacheable(value = CacheConstants.CACHE_NAME_SHOW, key = "#id")
-    public Show getShowById(String id) {
-        return tmdbApiClient.getShowById(id).orElse(null);
+    public Optional<Show> getShowById(String id) {
+        return tmdbApiClient.getShowById(id);
     }
 
     public boolean shouldRefetchShow(String id) {

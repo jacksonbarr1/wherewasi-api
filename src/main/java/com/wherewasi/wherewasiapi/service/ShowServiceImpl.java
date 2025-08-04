@@ -11,6 +11,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -43,6 +44,7 @@ public class ShowServiceImpl implements ShowService {
             return showRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Show not found in database: " + id));
         }
-        return tmdbService.getShowById(id);
+        Optional<Show> show = tmdbService.getShowById(id);
+        return show.orElseThrow(() -> new IllegalArgumentException("Show not found in TMDB: " + id));
     }
 }
