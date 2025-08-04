@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface TmdbService {
     List<ShowMetadataDTO> searchTvShows(String query);
+    boolean shouldRefetchShow(String id);
     Show getShowById(String id);
 }

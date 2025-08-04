@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShowMetadataDTO {
+public class ShowMetadataDTO{
     private String id;
     private String name;
     private List<Show.Genre> genres;

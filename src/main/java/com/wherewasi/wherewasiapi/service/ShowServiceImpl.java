@@ -11,7 +11,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -24,16 +23,7 @@ public class ShowServiceImpl implements ShowService {
     @Override
     @Cacheable(value = CacheConstants.CACHE_NAME_SHOW_DETAILS, key = "#id")
     public ShowDetailsDTO getShowDetailsById(String id) {
-        Optional<Show> showOptional = showRepository.findById(id);
-        Show show;
-
-        if (showOptional.isPresent() && !shouldRefetchShow(showOptional.get())) {
-            // Show is already in Mongo and does not need refetching
-            show = showOptional.get();
-        } else {
-            show = tmdbService.getShowById(id);
-        }
-
+        Show show = getShowFromDbOrApi(id);
         return showMapper.showToShowDetailsDTO(show);
     }
 
@@ -48,7 +38,11 @@ public class ShowServiceImpl implements ShowService {
         return null;
     }
 
-    private boolean shouldRefetchShow(Show show) {
-        return true;
+    private Show getShowFromDbOrApi(String id) {
+        if (showRepository.existsById(id) && !tmdbService.shouldRefetchShow(id)) {
+            return showRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Show not found in database: " + id));
+        }
+        return tmdbService.getShowById(id);
     }
 }
