@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@Validated
 @RequestMapping("/api/v1/show")
 public class ShowController {
 
@@ -26,7 +28,7 @@ public class ShowController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ShowDetailsDTO> getShowDetailsById(@PathVariable @Pattern(regexp = "^[0-9]+$") String id) {
-        return ResponseEntity.ok(showService.getShowDetailsById(id));
+    public ResponseEntity<ShowDetailsDTO> getShowDetailsById(@PathVariable Integer id) {
+        return ResponseEntity.ok(showService.getShowDetailsById(String.valueOf(id)));
     }
 }
