@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class TmdbSearchResult {
-    private Integer id;
+    private String id;
     private String name;
     private String overview;
     @JsonProperty("genre_ids")

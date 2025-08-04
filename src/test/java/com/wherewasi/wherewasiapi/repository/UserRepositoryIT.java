@@ -3,6 +3,7 @@ package com.wherewasi.wherewasiapi.repository;
 import com.wherewasi.wherewasiapi.AbstractIT;
 import com.wherewasi.wherewasiapi.enumeration.UserRole;
 import com.wherewasi.wherewasiapi.model.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,6 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class UserRepositoryIT extends AbstractIT {
     @Autowired
     private UserRepository userRepository;
+
+    @BeforeEach
+    void setUp() {
+        userRepository.deleteAll();
+    }
 
     @Test
     void shouldSaveAndFindUserByEmail() {

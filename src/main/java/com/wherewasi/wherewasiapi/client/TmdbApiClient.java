@@ -1,7 +1,9 @@
 package com.wherewasi.wherewasiapi.client;
 
+import com.wherewasi.wherewasiapi.client.dto.TmdbChangesResponse;
 import com.wherewasi.wherewasiapi.client.dto.TmdbGenreListResponse;
 import com.wherewasi.wherewasiapi.client.dto.TmdbSearchResponse;
+import com.wherewasi.wherewasiapi.model.Show;
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
 import org.slf4j.Logger;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.time.Duration;
@@ -36,13 +39,37 @@ public class TmdbApiClient {
     }
 
     public Optional<TmdbSearchResponse> searchTvShows(String query, int currentPage) {
-        URI uri = URI.create(String.format("%s/search/tv?query=%s&page=%d", TMDB_API_BASE_URL, query, currentPage));
+        URI uri = UriComponentsBuilder.fromHttpUrl(TMDB_API_BASE_URL + "/search/tv")
+                .queryParam("query", query)
+                .queryParam("page", currentPage)
+                .build()
+                .toUri();
         return executeApiCall(uri, TmdbSearchResponse.class, "TV Show Search", query, currentPage);
     }
 
     public Optional<TmdbGenreListResponse> getTvGenreList() {
         URI uri = URI.create(String.format("%s/genre/tv/list", TMDB_API_BASE_URL));
         return executeApiCall(uri, TmdbGenreListResponse.class, "TV Genre List");
+    }
+
+    public Optional<Show> getShowById(String id) {
+        URI uri = URI.create(String.format("%s/tv/%s", TMDB_API_BASE_URL, id));
+        return executeApiCall(uri, Show.class, "TV Show Details", id);
+    }
+
+    public Optional<TmdbChangesResponse> getChangesById(String id) {
+        URI uri = URI.create(String.format("%s/tv/%s/changes", TMDB_API_BASE_URL, id));
+        Optional<TmdbChangesResponse> responseOptional = executeApiCall(uri, TmdbChangesResponse.class,
+                "TV Show Changes", id);
+
+        if (responseOptional.isPresent()) {
+            TmdbChangesResponse response = responseOptional.get();
+            if (response.getChanges() == null || response.getChanges().isEmpty()) {
+                return Optional.empty();
+            }
+        }
+
+        return responseOptional;
     }
 
     private <T> Optional<T> executeApiCall(URI uri, Class<T> responseType, String description, Object... identifiers) {
