@@ -4,6 +4,7 @@ import com.wherewasi.wherewasiapi.dto.response.ShowDetailsDTO;
 import com.wherewasi.wherewasiapi.dto.response.ShowMetadataDTO;
 import com.wherewasi.wherewasiapi.service.ShowService;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class ShowController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ShowDetailsDTO> getShowDetailsById(@PathVariable String id) {
+    public ResponseEntity<ShowDetailsDTO> getShowDetailsById(@PathVariable @Pattern(regexp = "^[0-9]+$") String id) {
         return ResponseEntity.ok(showService.getShowDetailsById(id));
     }
 }
