@@ -19,16 +19,16 @@ public class RedisIT extends AbstractIT {
     @Test
     void whenStoreShowMetadataDTOValue_thenShouldReturnCorrectValue() {
         ShowMetadataDTO dto = ShowMetadataDTO.builder()
-                .id(1)
+                .id("1")
                 .name("Test Show")
                 .genres(
                         List.of(
                                 Show.Genre.builder()
-                                        .id(2)
+                                        .id("2")
                                         .name("Comedy")
                                         .build(),
                                 Show.Genre.builder()
-                                        .id(3)
+                                        .id("3")
                                         .name("Drama")
                                         .build()
 

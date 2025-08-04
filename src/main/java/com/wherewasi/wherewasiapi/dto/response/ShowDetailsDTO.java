@@ -19,7 +19,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShowDetailsDTO {
-    private Integer id;
+    private String id;
     private String homepage;
     private String name;
     private String overview;

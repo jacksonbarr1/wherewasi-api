@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @Document(collection = "roles")
 public class Role {
     @MongoId
-    private ObjectId id;
+    private String id;
     private UserRole name;
 
     public Role() {

@@ -19,7 +19,7 @@ import java.util.List;
 public class Show {
     // All `id` fields map 1:1 to the TMDB ID
     @MongoId
-    private ObjectId id;
+    private String id;
     private Boolean adult;
     private String homepage;
     private String name;
@@ -50,7 +50,7 @@ public class Show {
     @AllArgsConstructor
     @ToString
     public static class Season {
-        private int id;
+        private String id;
         private String name;
         private int seasonNumber;
         private int episodeCount;
@@ -67,7 +67,7 @@ public class Show {
     @AllArgsConstructor
     @ToString
     public static class Episode {
-        private int id;
+        private String id;
         private int episodeNumber;
         private LocalDate airDate;
         private String name;
@@ -82,7 +82,7 @@ public class Show {
     @AllArgsConstructor
     @ToString
     public static class Genre {
-        private int id;
+        private String id;
         private String name;
     }
 
@@ -92,7 +92,7 @@ public class Show {
     @AllArgsConstructor
     @ToString
     public static class Creator {
-        private int id;
+        private String id;
         private String name;
         private String profilePath;
     }
@@ -103,7 +103,7 @@ public class Show {
     @AllArgsConstructor
     @ToString
     public static class Network {
-        private int id;
+        private String id;
         private String name;
         private String logoPath;
         private String originCountry;

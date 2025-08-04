@@ -1,7 +1,9 @@
 package com.wherewasi.wherewasiapi.client;
 
+import com.wherewasi.wherewasiapi.client.dto.TmdbChangesResponse;
 import com.wherewasi.wherewasiapi.client.dto.TmdbGenreListResponse;
 import com.wherewasi.wherewasiapi.client.dto.TmdbSearchResponse;
+import com.wherewasi.wherewasiapi.model.Show;
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
 import org.slf4j.Logger;
@@ -43,6 +45,33 @@ public class TmdbApiClient {
     public Optional<TmdbGenreListResponse> getTvGenreList() {
         URI uri = URI.create(String.format("%s/genre/tv/list", TMDB_API_BASE_URL));
         return executeApiCall(uri, TmdbGenreListResponse.class, "TV Genre List");
+    }
+
+    public Optional<Show> getShowById(String id) {
+        URI uri = URI.create(String.format("%s/tv/%s", TMDB_API_BASE_URL, id));
+        Optional<Show> responseOptional = executeApiCall(uri, Show.class, "TV Show Details", id);
+
+        if (responseOptional.isPresent()) {
+            Show show = responseOptional.get();
+            return Optional.of(show);
+        }
+
+        return Optional.empty();
+    }
+
+    public Optional<TmdbChangesResponse> getChangesById(Integer id) {
+        URI uri = URI.create(String.format("%s/tv/%d/changes", TMDB_API_BASE_URL, id));
+        Optional<TmdbChangesResponse> responseOptional = executeApiCall(uri, TmdbChangesResponse.class,
+                "TV Show Changes", id);
+
+        if (responseOptional.isPresent()) {
+            TmdbChangesResponse response = responseOptional.get();
+            if (response.getChanges() == null || response.getChanges().isEmpty()) {
+                return Optional.empty();
+            }
+        }
+
+        return responseOptional;
     }
 
     private <T> Optional<T> executeApiCall(URI uri, Class<T> responseType, String description, Object... identifiers) {

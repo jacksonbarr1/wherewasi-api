@@ -36,8 +36,8 @@ public class ShowServiceIT extends AbstractIT {
         String cacheKey = getTvShowSearchKey(query);
 
         List<ShowMetadataDTO> expectedResults = Arrays.asList(
-                ShowMetadataDTO.builder().id(1).name("Test Show 1").build(),
-                ShowMetadataDTO.builder().id(2).name("Test Show 2").build()
+                ShowMetadataDTO.builder().id("1").name("Test Show 1").build(),
+                ShowMetadataDTO.builder().id("2").name("Test Show 2").build()
         );
 
         redisTemplate.opsForValue().set(cacheKey, expectedResults, 60, TimeUnit.MINUTES);

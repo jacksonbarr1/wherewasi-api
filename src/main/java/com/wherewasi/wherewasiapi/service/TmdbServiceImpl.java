@@ -57,6 +57,10 @@ public class TmdbServiceImpl implements TmdbService {
                 .collect(Collectors.toList());
     }
 
+    public Show getShowById(String id) {
+        return tmdbApiClient.getShowById(id).orElse(null);
+    }
+
     private boolean isEnglishLanguage(TmdbSearchResult dto) {
         return dto.getOriginLanguage() != null && dto.getOriginLanguage().equalsIgnoreCase("en");
     }

@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShowMetadataDTO {
-    private Integer id;
+    private String id;
     private String name;
     private List<Show.Genre> genres;
     private String firstAirDate;
