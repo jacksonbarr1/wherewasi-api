@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.time.Duration;
@@ -38,7 +39,11 @@ public class TmdbApiClient {
     }
 
     public Optional<TmdbSearchResponse> searchTvShows(String query, int currentPage) {
-        URI uri = URI.create(String.format("%s/search/tv?query=%s&page=%d", TMDB_API_BASE_URL, query, currentPage));
+        URI uri = UriComponentsBuilder.fromHttpUrl(TMDB_API_BASE_URL + "/search/tv")
+                .queryParam("query", query)
+                .queryParam("page", currentPage)
+                .build()
+                .toUri();
         return executeApiCall(uri, TmdbSearchResponse.class, "TV Show Search", query, currentPage);
     }
 
