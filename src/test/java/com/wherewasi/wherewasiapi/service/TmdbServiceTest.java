@@ -4,7 +4,6 @@ import com.wherewasi.wherewasiapi.client.TmdbApiClient;
 import com.wherewasi.wherewasiapi.client.dto.TmdbChangesResponse;
 import com.wherewasi.wherewasiapi.model.Show;
 import com.wherewasi.wherewasiapi.repository.ShowRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

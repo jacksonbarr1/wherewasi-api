@@ -4,7 +4,6 @@ import com.wherewasi.wherewasiapi.dto.response.ShowDetailsDTO;
 import com.wherewasi.wherewasiapi.dto.response.ShowMetadataDTO;
 import com.wherewasi.wherewasiapi.service.ShowService;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

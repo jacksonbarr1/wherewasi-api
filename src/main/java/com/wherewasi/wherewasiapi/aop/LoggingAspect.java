@@ -25,14 +25,16 @@ public class LoggingAspect {
     @Pointcut("within(@org.springframework.stereotype.Repository *)" +
             " || within(@org.springframework.stereotype.Service *)" +
             " || within(@org.springframework.web.bind.annotation.RestController *)")
-    public void springBeanPointcut() {}
+    public void springBeanPointcut() {
+    }
 
     @Pointcut("within(com.wherewasi.wherewasiapi..*)")
     public void applicationPackagePointcut() {
     }
 
     @Pointcut("execution(* com.wherewasi.wherewasiapi..*.*(..)) && @annotation(org.springframework.cache.annotation.Cacheable)")
-    public void cacheableMethodPointcut() {}
+    public void cacheableMethodPointcut() {
+    }
 
     @Around("springBeanPointcut() && applicationPackagePointcut()")
     public Object applicationLogger(ProceedingJoinPoint joinPoint) throws Throwable {

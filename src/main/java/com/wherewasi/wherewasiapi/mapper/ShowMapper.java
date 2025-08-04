@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public interface ShowMapper {
 
     @Mapping(target = "id", source = "id")
-    @Mapping(target = "firstAirDate", source = "firstAirDate", qualifiedByName="localDateToString")
+    @Mapping(target = "firstAirDate", source = "firstAirDate", qualifiedByName = "localDateToString")
     @Mapping(target = "seasonEpisodeCounts", source = "seasons", qualifiedByName = "seasonsToEpisodeCounts")
     ShowDetailsDTO showToShowDetailsDTO(Show show);
 

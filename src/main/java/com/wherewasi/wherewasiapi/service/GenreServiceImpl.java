@@ -5,11 +5,9 @@ import com.wherewasi.wherewasiapi.client.dto.TmdbGenre;
 import com.wherewasi.wherewasiapi.client.dto.TmdbGenreListResponse;
 import com.wherewasi.wherewasiapi.model.Show;
 import com.wherewasi.wherewasiapi.util.CacheConstants;
-import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
