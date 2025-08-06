@@ -24,11 +24,17 @@ public class UserProgressServiceImpl implements UserProgressService {
         Optional<UserShowProgress> existingProgress = userShowProgressRepository.findByUserIdAndShowId(userId, showId);
 
         // Update existing progress if exists, otherwise create new progress object
-        UserShowProgress progress = existingProgress.orElseGet(() -> UserShowProgress.builder()
-                .userId(userId)
-                .showId(showId)
-                .watchedEpisodesBySeason(request.getWatchedEpisodesBySeason())
-                .build());
+        UserShowProgress progress;
+        if (existingProgress.isPresent()) {
+            progress = existingProgress.get();
+            progress.setWatchedEpisodesBySeason(request.getWatchedEpisodesBySeason());
+        } else {
+            progress = UserShowProgress.builder()
+                    .userId(userId)
+                    .showId(showId)
+                    .watchedEpisodesBySeason(request.getWatchedEpisodesBySeason())
+                    .build();
+        }
 
         userShowProgressRepository.save(progress);
 
