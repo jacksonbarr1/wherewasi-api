@@ -19,7 +19,10 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Build and Run Tests
+      - name: Build and Run Unit Tests
+        run: mvn clean test
+
+      - name: Build and Run Integration Tests
         run: mvn clean verify
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
