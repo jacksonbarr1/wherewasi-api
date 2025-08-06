@@ -20,5 +20,5 @@ public class UserShowProgressRequest {
     @Valid
     @NotNull
     @NotEmpty
-    private Map<@Positive  Integer, @NotEmpty List< @Positive Integer>> watchedEpisodesBySeason;
+    private Map<@Positive Integer, @NotEmpty List<@Positive Integer>> watchedEpisodesBySeason;
 }
