@@ -22,12 +22,12 @@ public class UserProgressController {
 
     @PutMapping("/{showId}")
     public ResponseEntity<UserShowProgressResponse> createOrUpdateUserShowProgress(
-            @PathVariable @Min(1) Integer showId,
+            @PathVariable String showId,
             @RequestBody @Valid UserShowProgressRequest request,
             Principal principal) {
         String userId = principal.getName();
         UserShowProgressResponse progress = userProgressService.createOrUpdateUserShowProgress(request,
-                String.valueOf(showId), userId);
+                showId, userId);
 
         return ResponseEntity.ok(progress);
     }
