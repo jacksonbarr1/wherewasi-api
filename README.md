@@ -1,5 +1,12 @@
 # Where Was I API
 
+## Overview
+
+This repo contains source code for the Where Was I API, a Spring Boot REST API that provides services for users to track their
+TV show watching history, manage watchlists, and discover new shows. The API integrates with the TMDB API to fetch live
+episode metadata and images as needed to support the frontend application. The primary supporting technologies are MongoDB for
+long term storage of user and show data, and Redis for caching frequently accessed data.
+
 ## Run Instructions
 
 ### Development
@@ -15,7 +22,7 @@ spin up containers for the application's dependencies (MongoDB, Redis) on start.
         - `JWT_SECRET`: JWT secret for signing authentication tokens
         - `TMDB_API_KEY`: API key for interfacing with TMDB API for fetching TV data
 - Run the application through an IDE run configuration (remember to provide your .env file) or through the terminal with
-  `./mvnw spring-boot:run`
+  `./mvnw spring-boot:run` OR use the included `run-dev.sh` bash script to start the application using environment variables from a `.env` file.
 
 ## Testing
 
