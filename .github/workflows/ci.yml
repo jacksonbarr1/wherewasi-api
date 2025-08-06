@@ -22,5 +22,3 @@ jobs:
           token: ${{ secrets.TC_CLOUD_TOKEN }}
       - name: Build with Maven
         run: ./mvnw verify
-
-jobs:
