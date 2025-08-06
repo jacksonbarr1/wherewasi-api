@@ -18,9 +18,9 @@ public class UserProgressServiceImpl implements UserProgressService {
     private final UserProgressMapper userProgressMapper;
 
     @Override
-    public UserShowProgressResponse createOrUpdateUserShowProgress(UserShowProgressRequest request, String userId) {
+    public UserShowProgressResponse createOrUpdateUserShowProgress(UserShowProgressRequest request, String showId,
+                                                                   String userId) {
         // Find existing progress by userId and showId
-        String showId = request.getShowId();
         Optional<UserShowProgress> existingProgress = userShowProgressRepository.findByUserIdAndShowId(userId, showId);
 
         // Update existing progress if exists, otherwise create new progress object
