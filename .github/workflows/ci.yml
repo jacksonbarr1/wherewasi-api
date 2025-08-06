@@ -2,7 +2,7 @@ name: CI Build
 
 on:
   pull_request:
-    branches: '**'
+    branches: [main]
 
 jobs:
   build-and-test:
@@ -22,11 +22,19 @@ jobs:
       - name: Build and Run Unit Tests
         run: mvn clean test
 
-      - name: Build and Run Integration Tests
-        run: mvn clean verify
+      - name: Run Integration Tests
+        run: mvn verify
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
+
+      - name: Publish Test Reports
+        uses: dorny/test-reporter@v2
+        if: always()
+        with:
+          name: Maven Test Results
+          path: '**/surefire-reports/*.xml'
+          reporter: 'java-junit5'
 
 
 
