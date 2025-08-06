@@ -26,6 +26,7 @@ public class UserShowProgress {
     private String userId;
     private String showId;
 
+    // {seasonNo: [episodeNumbers]}
     private Map<Integer, List<Integer>> watchedEpisodesBySeason;
 
     @CreatedDate
