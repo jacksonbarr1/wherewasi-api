@@ -30,11 +30,11 @@ The test environment (`test` Spring profile) does not require injection of any e
 
 ### Unit Tests
 
-- `/mvnw clean test`
+- `./mvnw clean test`
 
 ### Integration Tests
 
 Testcontainers library provides docker containers for relevant dependencies at runtime.
 
 - Ensure Docker Desktop is installed and running
-- `/mvnw clean verify`
+- `./mvnw clean verify`
